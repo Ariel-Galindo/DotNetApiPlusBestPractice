@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using WebApiProject.Api.CustomActionFilters;
@@ -11,6 +12,7 @@ namespace WebApiProject.Api.Controllers
     // https://localhost:{port}/api/walks
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class WalksController : ControllerBase
     {
         private const string WalksCacheKey = "WalksList";

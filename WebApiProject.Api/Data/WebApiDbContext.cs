@@ -5,7 +5,7 @@ namespace WebApiProject.Api.Data
 {
     public class WebApiDbContext : DbContext
     {
-        public WebApiDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
+        public WebApiDbContext(DbContextOptions<WebApiDbContext> dbContextOptions) : base(dbContextOptions)
         {
         }
 
