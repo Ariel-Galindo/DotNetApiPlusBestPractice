@@ -12,7 +12,6 @@ namespace WebApiProject.Api.Controllers
     // https://localhost:{port}/api/walks
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class WalksController : ControllerBase
     {
         private const string WalksCacheKey = "WalksList";
@@ -34,6 +33,7 @@ namespace WebApiProject.Api.Controllers
 
         #region GET: https://localhost:{port}/api/walks?filterOn=&filterQuery=&sortBy=&isAscending=&pageNumber=&pageSize=
         [HttpGet]
+        [Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetAll([FromQuery] string? filterOn, [FromQuery] string? filterQuery, 
             [FromQuery] string? sortBy, [FromQuery] bool? isAscending,
             [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 1000)
@@ -91,6 +91,7 @@ namespace WebApiProject.Api.Controllers
         #region GET: https://localhost:{port}/api/walks/{id}
         [HttpGet]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
 
@@ -148,6 +149,7 @@ namespace WebApiProject.Api.Controllers
         #region POST: https://localhost:{port}/api/walks
         [HttpPost]
         [ValidateModel]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Create([FromBody] AddWalkRequestDto addWalkRequestDto)
         {
             // Convert DTO to Domain
@@ -171,6 +173,7 @@ namespace WebApiProject.Api.Controllers
         [HttpPut]
         [Route("{id:Guid}")]
         [ValidateModel]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateWalkRequestDto updateWalkRequestDto)
         {
             // Convert DTO to Domain
@@ -198,6 +201,7 @@ namespace WebApiProject.Api.Controllers
         #region DELETE: https://localhost:{port}/api/walks/{id}
         [HttpDelete]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             // Delete walk
