@@ -20,6 +20,10 @@ namespace WebApiProject.Api.Mappings
 
             // Difficulty mappings
             CreateMap<Difficulty, DifficultyDto>().ReverseMap();
+
+            // Image mappings
+            CreateMap<Image, ImageDto>().ReverseMap();
+            CreateMap<ImageUploadRequestDto, Image>().ReverseMap();
         }
     }
 }
